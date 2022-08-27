@@ -22,4 +22,4 @@ Application : Dýþ servisleri ve tüm baðýmlýlýklarý bu proje yönetiyor. CQRS bura
 CQRS -> Command,Query,Responsiblity,Segregation -> Update, Delete, Create -> Commandlar
 Query -> Select operasyonlarý
 
-27.08.2022 not dosyasý test güncelleme
+27.08.2022 not dosyasý test güncellemesi
