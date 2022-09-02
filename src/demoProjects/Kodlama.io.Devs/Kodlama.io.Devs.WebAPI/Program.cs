@@ -1,3 +1,4 @@
+using Core.CrossCuttingConcerns.Exceptions;
 using Kodlama.io.Devs.Application;
 using Kodlama.io.Devs.Persistence;
 
@@ -25,6 +26,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//if (app.Environment.IsProduction())
+    app.ConfigureCustomExceptionMiddleware();
 
 app.UseAuthorization();
 

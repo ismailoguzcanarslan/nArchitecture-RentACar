@@ -1,5 +1,8 @@
-﻿using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
+﻿using Core.Application.Requests;
+using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos;
+using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Models;
+using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +17,14 @@ namespace Kodlama.io.Devs.WebAPI.Controllers
         {
             CreateProgrammingLanguageDto result = await Mediator.Send(createProgrammingLanguageCommand);
             return Created("", result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
+        {
+            GetListProgrammingLanguageQuery getListProgrammingLanguageQuery = new() { PageRequest = pageRequest };
+            ProgrammingLanguageListModel result = await Mediator.Send(getListProgrammingLanguageQuery);
+            return Ok(result);
         }
     }
 }
