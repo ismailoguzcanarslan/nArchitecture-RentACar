@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage
 {
-    internal class CreateProgrammingLanguageCommandValidator : AbstractValidator<CreateProgrammingLanguageCommand>
+    public class CreateProgrammingLanguageCommandValidator : AbstractValidator<CreateProgrammingLanguageCommand>
     {
         public CreateProgrammingLanguageCommandValidator()
         {
