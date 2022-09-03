@@ -14,8 +14,8 @@ namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.Upd
 {
     public class UpdateProgrammingLanguageCommand : IRequest<UpdatedProgrammingLanguageDto>
     {
-        public string Name { get; set; }
         public int Id { get; set; }
+        public string Name { get; set; }
 
         public class UpdateProgrammingLanguageCommandHandler : IRequestHandler<UpdateProgrammingLanguageCommand, UpdatedProgrammingLanguageDto>
         {
@@ -33,14 +33,14 @@ namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.Upd
 
             public async Task<UpdatedProgrammingLanguageDto> Handle(UpdateProgrammingLanguageCommand request, CancellationToken cancellationToken)
             {
-                ProgrammingLanguage? programmingLanguage = await _programmingLanguageRepository.GetAsync(a => a.Id == request.Id);
+                var programmingLanguage = await _programmingLanguageRepository.GetAsync(a=>a.Id == request.Id);
 
                 _programmingLanguageBusinessRules.ProgramminLanguageShouldExistWhenUpdated(programmingLanguage);
                 await _programmingLanguageBusinessRules.ProgrammingLanguageCanNotDublicateWhenUpdated(request.Name);
 
-                ProgrammingLanguage mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
+                _mapper.Map(request, programmingLanguage);
 
-                ProgrammingLanguage updatedProgrammingLanguage = await _programmingLanguageRepository.UpdateAsync(mappedProgrammingLanguage);
+                ProgrammingLanguage updatedProgrammingLanguage = await _programmingLanguageRepository.UpdateAsync(programmingLanguage);
 
                 UpdatedProgrammingLanguageDto updatedProgrammingLanguageDto = _mapper.Map<UpdatedProgrammingLanguageDto>(updatedProgrammingLanguage);
 
