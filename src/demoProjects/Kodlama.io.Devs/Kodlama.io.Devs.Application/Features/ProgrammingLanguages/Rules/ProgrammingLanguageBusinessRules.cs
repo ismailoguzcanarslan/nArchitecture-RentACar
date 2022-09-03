@@ -19,7 +19,7 @@ namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules
             _programmingLanguageRepository = programmingLanguageRepository;
         }
 
-        public async Task ProgrammingLanguageCanNotBeDublicatedWhenInsertedOrUpdated(string name)
+        public async Task ProgrammingLanguageCanNotBeDublicatedWhenInserted(string name)
         {
             IPaginate<ProgrammingLanguage> result = await _programmingLanguageRepository.GetListAsync(p => p.Name == name);
             if (result.Items.Any()) throw new BusinessException("Programming language name exist");
@@ -28,6 +28,22 @@ namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules
         public void ProgramminLanguageShouldExistWhenRequested(ProgrammingLanguage programmingLanguage)
         {
             if (programmingLanguage == null) throw new BusinessException("Programming language does not exist");
+        }
+
+        public void ProgramminLanguageShouldExistWhenDeleted(ProgrammingLanguage programmingLanguage)
+        {
+            if (programmingLanguage == null) throw new BusinessException("Programming language does not exist");
+        }
+
+        public void ProgramminLanguageShouldExistWhenUpdated(ProgrammingLanguage programmingLanguage)
+        {
+            if (programmingLanguage == null) throw new BusinessException("Programming language does not exist");
+        }
+
+        public async Task ProgrammingLanguageCanNotDublicateWhenUpdated(string name)
+        {
+            IPaginate<ProgrammingLanguage> result = await _programmingLanguageRepository.GetListAsync(p => p.Name == name);
+            if (result.Items.Any()) throw new BusinessException("Programming language name exist");
         }
     }
 }
