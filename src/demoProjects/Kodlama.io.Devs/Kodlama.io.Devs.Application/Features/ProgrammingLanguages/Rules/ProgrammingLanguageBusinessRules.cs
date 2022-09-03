@@ -25,7 +25,7 @@ namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules
             if (result.Items.Any()) throw new BusinessException("Programming language name exist");
         }
 
-        public void ProgramminLanguageExistWhenRequested(ProgrammingLanguage programmingLanguage)
+        public void ProgramminLanguageShouldExistWhenRequested(ProgrammingLanguage programmingLanguage)
         {
             if (programmingLanguage == null) throw new BusinessException("Programming language does not exist");
         }
