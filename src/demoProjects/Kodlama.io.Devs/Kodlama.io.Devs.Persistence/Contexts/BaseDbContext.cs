@@ -14,6 +14,7 @@ namespace Kodlama.io.Devs.Persistence.Contexts
     {
         protected IConfiguration Configuration { get; set; }
         public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
+        public DbSet<Technology> Technologies { get; set; }
 
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
@@ -35,13 +36,24 @@ namespace Kodlama.io.Devs.Persistence.Contexts
                 a.ToTable("ProgrammingLanguages").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
                 a.Property(p => p.Name).HasColumnName("Name");
+                a.HasMany(p => p.Technologies);
             });
 
+            modelBuilder.Entity<Technology>(a =>
+            {
+                a.ToTable("Technologies").HasKey(k => k.Id);
+                a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.ProgrammingLanguageId).HasColumnName("ProgrammingLanguageId");
+                a.Property(p => p.Name).HasColumnName("Name");
+                a.HasOne(p => p.ProgrammingLanguage);
+            });
 
 
             ProgrammingLanguage[] programmingLanguageEntitySeeds = { new(1, "C#"), new(2, "Java") };
             modelBuilder.Entity<ProgrammingLanguage>().HasData(programmingLanguageEntitySeeds);
 
+            Technology[] technologyEntitySeeds = { new(1,2,"Spring"), new(2,2,"JSP"), new(3,1,"WPF"), new(4,1,"ASP.NET"), new(5,1,"Dynamics CRM 365") };
+            modelBuilder.Entity<Technology>().HasData(technologyEntitySeeds);
 
         }
     }
