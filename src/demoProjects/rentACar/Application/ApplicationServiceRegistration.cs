@@ -12,7 +12,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application
+namespace RentACar.Application
 {
     public static class ApplicationServiceRegistration
     {
